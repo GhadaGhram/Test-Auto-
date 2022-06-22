@@ -1,0 +1,119 @@
+package StepsDef;
+
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+
+import Page.Object.BEmailPage;
+import Page.Object.PageObject;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+
+public class LoginSteps {
+			
+			WebDriver driver=null;
+			PageObject login;
+			PageObject email;
+			PageObject motpasse;
+		
+			//code class page
+			//declaration des vars une clase a part ou bien dans la classe page en haut 
+			
+			@Given("browser is open")
+			public void browser_is_open() {
+				System.out.println("Inside Step - browser is open");		
+				String projectPath = System.getProperty("user.dir");
+				System.out.println("Project path is : "+projectPath);			
+			    System.setProperty("webdriver.edge.driver", projectPath+"/src/test/resources/drivers/msedgedriver.exe");
+						   
+				driver = new EdgeDriver();
+				driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+				driver.manage().window().maximize();	  
+			}
+			
+
+			@And("user is on login page")
+			public void user_is_on_login_page() throws InterruptedException {
+				driver.navigate().to("https://www.jumia.com.tn/");
+			    Thread.sleep(2000);	
+			    PageObject login=new PageObject(driver);
+			    login.newsLetter_close();			    				    
+			    login.clickOnSeConnecter();
+			    login.clickOnVotreCompte();    						
+			}
+	    
+			@When("^user enters his email (.*)$")
+			public void user_enter_his_email_ghadaa_ghram_gmail_com(String arg1) throws InterruptedException {
+				//BEmailPage email=new BEmailPage(driver);
+				PageObject email=new PageObject(driver);
+				email.enterEmail(arg1);
+				Thread.sleep(2000);			
+			    email.clickOnContinue();
+			}
+
+			@Then("^user enters his password (.*)$")
+			public void user_enters_Gh11046090(String arg1) throws InterruptedException {
+    			//login.enterPassword(arg1);
+				//Thread.sleep(2000);
+				//login.clickOnSeconnecter2();
+			}};
+
+
+			
+			
+			
+			
+			
+			
+		/*	@Given("browser is open")
+			public void browser_is_open() {
+				
+					System.out.println("Inside Step - browser is open");		
+					String projectPath = System.getProperty("user.dir");
+					System.out.println("Project path is : "+projectPath);			
+				    System.setProperty("webdriver.edge.driver", projectPath+"/src/test/resources/drivers/msedgedriver.exe");
+							   
+					driver = new EdgeDriver();
+					driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+					driver.manage().window().maximize();				
+			}
+
+			@And("user is on login page")
+			public void user_is_on_login_page() throws InterruptedException {
+			    	driver.navigate().to("https://www.jumia.com.tn/");
+				    Thread.sleep(2000);	
+				    AHomePage pageAcceuil=new AHomePage(driver);
+				    pageAcceuil.newsLetter_close();			    				    
+				    pageAcceuil.clickOnSeConnecter();
+				    pageAcceuil.clickOnVotreCompte();
+			}
+
+			@When("user enters username")
+			public void user_enters_ghadaa_ghram_gmail_com_and_clicks_on_continue(String arg1) throws InterruptedException {
+				
+				BEmailPage email = new BEmailPage(driver);
+				email.enterEmail(arg1);
+				Thread.sleep(2000);			
+			    email.clickOnContinue();
+				
+			  
+			}
+
+			@Then("user enters password")
+			public void user_enters_Gh11046090_and_clicks_on_continue(String arg2) throws InterruptedException {
+				
+				CPasswordPage motpasse= new CPasswordPage(driver);
+				motpasse.enterPassword(arg2);
+			    Thread.sleep(1000);
+				motpasse.clickOnSeconnecter2();
+				/*driver.navigate().to("https://my.jumia.com.tn/interaction/GMRwTYL8cSu3JKlTqGGnU/fr-tn/sign-in/email");
+				driver.findElement(By.xpath("//input[contains(@name,'email')]")).sendKeys("ghadaa.ghram@gmail.com");
+			    driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[3]/div/button")).click();
+				driver.findElement(By.xpath("//*[@id=\"passwordForm\"]/div[2]/div[3]/label/i")).click();*/
+				
+			
+
+
